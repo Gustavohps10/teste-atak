@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teste-atak.Server", "teste-atak.Server\teste-atak.Server.csproj", "{B20549D7-C096-4242-B65F-CA4EFE67AAC6}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "teste-atak.client", "teste-atak.client\teste-atak.client.esproj", "{8EB8F9DA-0A37-47D0-96CE-38122E9131A7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B20549D7-C096-4242-B65F-CA4EFE67AAC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B20549D7-C096-4242-B65F-CA4EFE67AAC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B20549D7-C096-4242-B65F-CA4EFE67AAC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B20549D7-C096-4242-B65F-CA4EFE67AAC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EB8F9DA-0A37-47D0-96CE-38122E9131A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EB8F9DA-0A37-47D0-96CE-38122E9131A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EB8F9DA-0A37-47D0-96CE-38122E9131A7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8EB8F9DA-0A37-47D0-96CE-38122E9131A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EB8F9DA-0A37-47D0-96CE-38122E9131A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EB8F9DA-0A37-47D0-96CE-38122E9131A7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {401C3D58-DBAD-497A-BA63-F34D69492E98}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+@teste_atak.Server_HostAddress = http://localhost:5217
+
+GET {{teste_atak.Server_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
