@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>teste_atak.Infra.Ioc</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\teste-atak.Application\teste-atak.Application.csproj" />
+    <ProjectReference Include="..\teste-atak.Domain\teste-atak.Domain.csproj" />
+    <ProjectReference Include="..\teste-atak.Infra.Data\teste-atak.Infra.Data.csproj" />
+  </ItemGroup>
+
+</Project>
