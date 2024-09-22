@@ -1,4 +1,5 @@
-﻿using System.Net.Mail;
+﻿using System.IO;
+using System.Net.Mail;
 using System.Threading.Tasks;
 using teste_atak.Domain.Contracts;
 using teste_atak.Infra.Data.Config;
@@ -14,7 +15,7 @@ namespace teste_atak.Infra.Data.Repositories
             _smtpConfig = smtpConfig;
         }
 
-        public async Task Send(string to, string subject, string body, string? attachmentPath)
+        public async Task Send(string to, string subject, string body, MemoryStream attachmentStream)
         {
             using var smtpClient = new SmtpClient(_smtpConfig.Host, _smtpConfig.Port)
             {
@@ -24,9 +25,10 @@ namespace teste_atak.Infra.Data.Repositories
 
             var mailMessage = new MailMessage(_smtpConfig.From, to, subject, body);
 
-            if (!string.IsNullOrEmpty(attachmentPath) && File.Exists(attachmentPath))
+            if (attachmentStream != null)
             {
-                var attachment = new Attachment(attachmentPath);
+                attachmentStream.Position = 0;
+                var attachment = new Attachment(attachmentStream, "Clientes.xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
                 mailMessage.Attachments.Add(attachment);
             }
 

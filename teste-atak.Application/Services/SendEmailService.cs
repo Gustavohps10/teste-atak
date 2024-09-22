@@ -22,7 +22,7 @@ public class SendEmailService : ISendEmailUseCase
                 emailDTO.To,
                 emailDTO.Subject,
                 emailDTO.Body,
-                emailDTO.AttachmentPath);
+                emailDTO.AttachmentStream);
         }
         catch (Exception ex)
         {

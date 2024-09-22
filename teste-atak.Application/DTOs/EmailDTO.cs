@@ -13,6 +13,6 @@ namespace teste_atak.Application.DTOs
         [Required]
         public required string Body { get; set; }
 
-        public string? AttachmentPath { get; set; }
+        public required MemoryStream AttachmentStream { get; set; }
     }
 }

@@ -53,6 +53,7 @@ namespace teste_atak.Infra.Ioc
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICrypterRepository, CrypterRepository>();
             services.AddScoped<IMailerRepository, MailerRepository>();
+            services.AddScoped<IExcelFileRepository, ExcelFileRepository>();
 
             /*
              * Services - Use Cases
@@ -66,6 +67,9 @@ namespace teste_atak.Infra.Ioc
 
             //Email
             services.AddScoped<ISendEmailUseCase, SendEmailService>();
+
+            //Excel File
+            services.AddScoped<IGenerateExcelFileUseCase, GenerateExcelFileService>();
 
             return services;
         }
