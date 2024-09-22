@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using teste_atak.Application.Mappings;
 using teste_atak.Application.UseCases;
 using teste_atak.Domain.Contracts;
+using teste_atak.Infra.Data.Config;
 using teste_atak.Infra.Data.Context;
 using teste_atak.Infra.Data.Repositories;
 using teste_atak.Infra.Data.Seed;
@@ -19,6 +20,7 @@ namespace teste_atak.Infra.Ioc
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration config)
         {
+            //Database
             var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION")
                 ?? config.GetConnectionString("DefaultConnection");
 
@@ -27,15 +29,30 @@ namespace teste_atak.Infra.Ioc
                 options.UseNpgsql(connectionString,
                     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName));
             });
+            // Faker
+            services.AddScoped<BogusDataGenerator>();
+            
+            //SMTP Mail
+            var smtpConfig = new SmtpConfig
+            {
+                Host = config["SmtpSettings:Host"]!,
+                Port = int.TryParse(config["SmtpSettings:Port"], out var port) ? port : 587,
+                Username = config["SmtpSettings:Username"]!,
+                Password = config["SmtpSettings:Password"]!,
+                From = config["SmtpSettings:From"]!
+            };
+            services.AddSingleton(smtpConfig);
 
+            //AutoMapper
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
             /*
-            * Repositories
-            */
+             * Repositories
+             */
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ICrypterRepository, CrypterRepository>();
+            services.AddScoped<IMailerRepository, MailerRepository>();
 
             /*
              * Services - Use Cases
@@ -47,7 +64,9 @@ namespace teste_atak.Infra.Ioc
             //Customers
             services.AddScoped<IReadAllCustomersUseCase, ReadAllCustomersService>();
 
-            services.AddScoped<BogusDataGenerator>();
+            //Email
+            services.AddScoped<ISendEmailUseCase, SendEmailService>();
+
             return services;
         }
     }
