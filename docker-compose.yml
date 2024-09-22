@@ -1,0 +1,53 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: teste-atak-db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: teste-atak
+    ports:
+      - "5433:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  migrate:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.migrate
+    container_name: teste-atak-migrate
+    depends_on:
+      db:
+        condition: service_started
+    environment:
+      - DB_CONNECTION=Host=db;Port=5432;Username=postgres;Password=1234;Database=teste-atak;Pooling=true;MinPoolSize=0;MaxPoolSize=100;Timeout=15;
+
+  api:
+    build:
+      context: .
+      dockerfile: teste-atak.Server/Dockerfile
+    container_name: teste-atak-api
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    ports:
+      - "5000:80"
+    environment:
+      - DB_CONNECTION=Host=db;Port=5432;Username=postgres;Password=1234;Database=teste-atak;Pooling=true;MinPoolSize=0;MaxPoolSize=100;Timeout=15;
+      - ALLOWED_ORIGINS=http://localhost:5173,http://teste-atak-client:80
+
+  client:
+    build:
+      context: .
+      dockerfile: teste-atak.client/Dockerfile
+    container_name: teste-atak-client
+    ports:
+      - "5173:80"
+    depends_on:
+      api:
+        condition: service_started
+
+volumes:
+  db-data:
