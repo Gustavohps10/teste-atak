@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IO;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using teste_atak.Application.DTOs;
 using teste_atak.Application.UseCases;
@@ -34,11 +35,22 @@ namespace teste_atak.Server.Controllers
             {
                 using var excelFileStream = await _generateExcelFileService.Execute(customerIds);
 
+                var emailClaim = HttpContext.User.FindFirst(ClaimTypes.Email);
+                var nameClaim = HttpContext.User.FindFirst(ClaimTypes.Name);
+
+                if (emailClaim == null || nameClaim == null)
+                {
+                    return BadRequest("E-mail ou nome do usuário não encontrado.");
+                }
+
+                var userEmail = emailClaim.Value;
+                var userName = nameClaim.Value;
+
                 var emailDTO = new EmailDTO
                 {
-                    To = "gustavoh.santos735@gmail.com",
+                    To = userEmail,
                     Subject = "[QuickExcel] - Dados Gerados",
-                    Body = "Olá,\n\nEste e-mail contém os dados gerados pelo projeto QuickExcel. " +
+                    Body = $"Olá, {userName}!\n\nEste e-mail contém os dados gerados pelo projeto QuickExcel. " +
                            "Você pode verificar o repositório do projeto no GitHub em: " +
                            "https://github.com/Gustavohps10/teste-atak\n\n" +
                            "Atenciosamente,\nGustavo Henrique.",
@@ -54,5 +66,6 @@ namespace teste_atak.Server.Controllers
                 return StatusCode(500, ex.Message);
             }
         }
+
     }
 }
