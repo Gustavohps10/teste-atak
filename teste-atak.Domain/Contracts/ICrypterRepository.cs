@@ -4,7 +4,7 @@ namespace teste_atak.Domain.Contracts
 {
     public interface ICrypterRepository
     {
-        Task<string> EncryptAsync(string plainText);
-        Task<bool> CompareAsync(string plainText, string encryptedText);
+        Task<string> Encrypt(string plainText);
+        Task<bool> Compare(string plainText, string encryptedText);
     }
 }

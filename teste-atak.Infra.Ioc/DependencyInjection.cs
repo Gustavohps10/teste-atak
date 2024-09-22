@@ -35,6 +35,7 @@ namespace teste_atak.Infra.Ioc
             */
             services.AddScoped<ICustomerRepository, CustomerRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ICrypterRepository, CrypterRepository>();
 
             /*
              * Services - Use Cases
