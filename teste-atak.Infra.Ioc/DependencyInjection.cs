@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using teste_atak.Application.Mappings;
+using teste_atak.Application.UseCases;
 using teste_atak.Domain.Contracts;
 using teste_atak.Infra.Data.Context;
 using teste_atak.Infra.Data.Repositories;
@@ -41,6 +42,9 @@ namespace teste_atak.Infra.Ioc
 
             //Users
             services.AddScoped<ICreateUserUseCase, CreateUserService>();
+
+            //Customers
+            services.AddScoped<IReadAllCustomersUseCase, ReadAllCustomersService>();
 
             services.AddScoped<BogusDataGenerator>();
             return services;

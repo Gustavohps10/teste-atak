@@ -6,10 +6,17 @@ namespace teste_atak.Domain.Contracts
 {
     public interface ICustomerRepository
     {
-        Task<IEnumerable<Customer>> GetAll();
-        Task<Customer> GetById(string id);
+        Task<(IEnumerable<Customer> Items, int TotalCount, int TotalPages)> GetAll(
+            string? name,
+            string? phone,
+            string? sortBy,
+            bool sortDescending,
+            int pageNumber = 1,
+            int pageSize = 10);
+
+        Task<Customer?> GetById(string id);
         Task Insert(Customer customer);
-        Task InserRange(IEnumerable<Customer> customers);
+        Task InsertRange(IEnumerable<Customer> customers);
         Task<IEnumerable<Customer>> GetByMultipleIds(IEnumerable<string> ids);
     }
 }

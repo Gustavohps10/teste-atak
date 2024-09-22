@@ -50,7 +50,7 @@ namespace teste_atak.Infra.Data.Seed
                 customers.Add(customer);
             }
 
-            await _customerRepository.InserRange(customers);
+            await _customerRepository.InsertRange(customers);
         }
     }
 }
