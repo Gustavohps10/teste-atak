@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using teste_atak.Application.DTOs;
 using teste_atak.Application.UseCases;
 
@@ -16,6 +17,7 @@ namespace teste_atak.Server.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Handle(
             [FromQuery] string? name = null,
             [FromQuery] string? phone = null,

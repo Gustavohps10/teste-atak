@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using teste_atak.Application.Mappings;
+using teste_atak.Application.Services;
 using teste_atak.Application.UseCases;
 using teste_atak.Domain.Contracts;
 using teste_atak.Infra.Data.Config;
@@ -61,6 +62,7 @@ namespace teste_atak.Infra.Ioc
 
             //Users
             services.AddScoped<ICreateUserUseCase, CreateUserService>();
+            //services.AddScoped<IUserAuthenticationUseCase, UserAuthenticationService>();
 
             //Customers
             services.AddScoped<IReadAllCustomersUseCase, ReadAllCustomersService>();
@@ -70,6 +72,17 @@ namespace teste_atak.Infra.Ioc
 
             //Excel File
             services.AddScoped<IGenerateExcelFileUseCase, GenerateExcelFileService>();
+
+
+            services.AddScoped<IUserAuthenticationUseCase>(provider =>
+            {
+                var userRepository = provider.GetRequiredService<IUserRepository>();
+                var crypterRepository = provider.GetRequiredService<ICrypterRepository>();
+                var configuration = provider.GetRequiredService<IConfiguration>();
+                var secretKey = configuration["Jwt:Key"];
+
+                return new UserAuthenticationService(userRepository, crypterRepository, secretKey!);
+            });
 
             return services;
         }

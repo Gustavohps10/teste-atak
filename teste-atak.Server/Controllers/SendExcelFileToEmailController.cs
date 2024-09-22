@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.IO;
 using System.Threading.Tasks;
 using teste_atak.Application.DTOs;
@@ -21,6 +22,7 @@ namespace teste_atak.Server.Controllers
         }
 
         [HttpPost("send")]
+        [Authorize]
         public async Task<IActionResult> Handle([FromBody] string[] customerIds)
         {
             if (!ModelState.IsValid || customerIds == null || customerIds.Length == 0)
