@@ -9,6 +9,7 @@ namespace teste_atak.Application.Mappings
         public DomainToDTOMappingProfile()
         {
             CreateMap<User, UserDTO>().ReverseMap();
+            CreateMap<Customer, CustomerDTO>().ReverseMap();
         }
     }
 }
