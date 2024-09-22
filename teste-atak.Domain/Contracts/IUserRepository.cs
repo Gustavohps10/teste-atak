@@ -10,8 +10,8 @@ namespace teste_atak.Domain.Contracts
     public interface IUserRepository
     {
         Task<IEnumerable<User>> GetAll();
-        Task<User> GetById(string id);
-        Task<User> GetByEmail(string email);
+        Task<User?> GetById(string id);
+        Task<User?> GetByEmail(string email);
         Task Insert(User user);
     }
 }

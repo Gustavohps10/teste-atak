@@ -9,6 +9,7 @@ namespace teste_atak.Domain.Contracts
         Task<IEnumerable<Customer>> GetAll();
         Task<Customer> GetById(string id);
         Task Insert(Customer customer);
-        Task<IEnumerable<Customer>> GetByIds(IEnumerable<string> ids);
+        Task InserRange(IEnumerable<Customer> customers);
+        Task<IEnumerable<Customer>> GetByMultipleIds(IEnumerable<string> ids);
     }
 }

@@ -7,7 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using teste_atak.Application.Mappings;
+using teste_atak.Domain.Contracts;
 using teste_atak.Infra.Data.Context;
+using teste_atak.Infra.Data.Repositories;
+using teste_atak.Infra.Data.Seed;
 
 namespace teste_atak.Infra.Ioc
 {
@@ -27,20 +30,19 @@ namespace teste_atak.Infra.Ioc
             services.AddAutoMapper(typeof(DomainToDTOMappingProfile));
 
             /*
-             * Repositories
-             */
-           
+            * Repositories
+            */
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             /*
              * Services - Use Cases
              */
 
-            //Tasks
-           
+            //Users
+            services.AddScoped<ICreateUserUseCase, CreateUserService>();
 
-            //Heating Programs
-          
-
+            services.AddScoped<BogusDataGenerator>();
             return services;
         }
     }

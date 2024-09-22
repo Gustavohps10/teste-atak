@@ -38,7 +38,13 @@ namespace teste_atak.Infra.Data.Repositories
             await _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Customer>> GetByIds(IEnumerable<string> ids)
+        public async Task InserRange(IEnumerable<Customer> customers)
+        {
+            await _context.Customers.AddRangeAsync(customers);
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task<IEnumerable<Customer>> GetByMultipleIds(IEnumerable<string> ids)
         {
             return await _context.Customers.Where(c => ids.Contains(c.Id)).ToListAsync();
         }

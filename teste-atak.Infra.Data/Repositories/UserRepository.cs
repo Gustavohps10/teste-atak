@@ -21,25 +21,15 @@ namespace teste_atak.Infra.Data.Repositories
             return await _context.Users.ToListAsync();
         }
 
-        public async Task<User> GetById(string id)
+        public async Task<User?> GetById(string id)
         {
-            User? user = await _context.Users.FindAsync(id);
-            if (user == null)
-            {
-                throw new KeyNotFoundException("Usuário não encontrado.");
-            }
-            return user;
+            return await _context.Users.FindAsync(id);
         }
 
-        public async Task<User> GetByEmail(string email)
+        public async Task<User?> GetByEmail(string email)
         {
-            User? user = await _context.Users
+            return await _context.Users
                 .FirstOrDefaultAsync(u => u.Email == email);
-            if (user == null)
-            {
-                throw new KeyNotFoundException("Usuário não encontrado.");
-            }
-            return user;
         }
 
         public async Task Insert(User user)

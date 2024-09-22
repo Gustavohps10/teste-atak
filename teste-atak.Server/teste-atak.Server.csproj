@@ -24,8 +24,4 @@
     <ProjectReference Include="..\teste-atak.Infra.Ioc\teste-atak.Infra.Ioc.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
 </Project>
