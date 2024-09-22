@@ -6,6 +6,21 @@ using teste_atak.Infra.Ioc;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var allowedOrigins = builder.Configuration["ALLOWED_ORIGINS"]?.Split(",") ?? new[] { "http://localhost:5173" };
+
+// Habilitar CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        policy =>
+        {
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
+
 // Add services to the container.
 builder.Services.AddControllers();
 
