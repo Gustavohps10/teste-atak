@@ -7,13 +7,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "teste-atak.Server", "teste-
 EndProject
 Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "teste-atak.client", "teste-atak.client\teste-atak.client.esproj", "{8EB8F9DA-0A37-47D0-96CE-38122E9131A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teste-atak.Domain", "teste-atak.Domain\teste-atak.Domain.csproj", "{5C83EC4F-3A72-4DE5-9411-419DBD258DE1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "teste-atak.Domain", "teste-atak.Domain\teste-atak.Domain.csproj", "{5C83EC4F-3A72-4DE5-9411-419DBD258DE1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teste-atak.Infra.Data", "teste-atak.Infra.Data\teste-atak.Infra.Data.csproj", "{6BA9CB21-248A-4C53-A32E-4C629FEF6EF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "teste-atak.Infra.Data", "teste-atak.Infra.Data\teste-atak.Infra.Data.csproj", "{6BA9CB21-248A-4C53-A32E-4C629FEF6EF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teste-atak.Infra.Ioc", "teste-atak.Infra.Ioc\teste-atak.Infra.Ioc.csproj", "{F1C87031-5EFD-4245-B528-013FE8BD6DDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "teste-atak.Infra.Ioc", "teste-atak.Infra.Ioc\teste-atak.Infra.Ioc.csproj", "{F1C87031-5EFD-4245-B528-013FE8BD6DDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "teste-atak.Application", "teste-atak.Application\teste-atak.Application.csproj", "{8B1A6EEB-09E4-4B54-80AA-BA14FC521298}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "teste-atak.Application", "teste-atak.Application\teste-atak.Application.csproj", "{8B1A6EEB-09E4-4B54-80AA-BA14FC521298}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{798170B9-821A-4EBE-988C-13BF8964F594}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
