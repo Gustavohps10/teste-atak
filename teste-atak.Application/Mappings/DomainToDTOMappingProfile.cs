@@ -10,7 +10,8 @@ namespace teste_atak.Application.Mappings
         {
             CreateMap<User, UserDTO>().ReverseMap()
                 .ForMember(dest => dest.Id, opt => opt.Ignore());
-            CreateMap<Customer, CustomerDTO>().ReverseMap();
+            CreateMap<Customer, CustomerDTO>().ReverseMap()
+                .ForMember(dest => dest.Id, opt => opt.Ignore()); ;
         }
     }
 }
