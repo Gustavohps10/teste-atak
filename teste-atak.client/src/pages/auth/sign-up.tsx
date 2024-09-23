@@ -19,7 +19,7 @@ const schema = z.object({
   name: z.string().min(2, { message: 'Nome é obrigatório.' }),
   password: z
     .string()
-    .min(6, { message: 'A senha deve ter pelo menos 6 caracteres.' }),
+    .min(8, { message: 'A senha deve ter pelo menos 8 caracteres.' }),
 })
 
 type SignUpFormValues = z.infer<typeof schema>
