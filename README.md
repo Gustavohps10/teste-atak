@@ -9,6 +9,8 @@
 
 <p align="center"><img width="100%" src="./docs/screenshot.png"></p>
 
+> ⚠️  A aplicação envia o arquivo Excel para o email do usuário autenticado
+
 ## :page_with_curl: Descrição
 
 O projeto "QuickExcel" é uma aplicação web fullstack que automatiza o processo de envio de planilhas Excel por e-mail. Com uma interface amigável, os usuários podem fazer upload de suas planilhas com base de dados de clientes, facilitando a distribuição de dados essenciais de forma prática e rápida. O backend, desenvolvido em C# com ASP.NET Core, é responsável por processar os arquivos, enquanto o frontend em React oferece uma experiência interativa e intuitiva. Este projeto visa otimizar a comunicação e a troca de informações, tornando o envio de relatórios e análises uma tarefa simples e eficiente.
