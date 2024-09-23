@@ -4,7 +4,15 @@ import { ColumnDef } from '@tanstack/react-table'
 import { Customer } from '@/@types/Customer'
 import { Checkbox } from '@/components/ui/checkbox'
 
-export const columns: ColumnDef<Customer>[] = [
+interface ColumnProps {
+  selectedIds: string[]
+  setSelectedIds: React.Dispatch<React.SetStateAction<string[]>>
+}
+
+export const columns = ({
+  selectedIds,
+  setSelectedIds,
+}: ColumnProps): ColumnDef<Customer>[] => [
   {
     id: 'select',
     header: ({ table }) => {
@@ -15,37 +23,47 @@ export const columns: ColumnDef<Customer>[] = [
         <Checkbox
           checked={isAllSelected}
           onCheckedChange={(checked) => {
-            table.getRowModel().rows.forEach((row) => {
-              row.toggleSelected(!!checked)
-            })
+            const newSelectedIds = checked
+              ? table
+                  .getRowModel()
+                  .rows.map((row) => row.getValue('id') as string)
+              : []
+            setSelectedIds(newSelectedIds)
+            table
+              .getRowModel()
+              .rows.forEach((row) => row.toggleSelected(!!checked))
           }}
         >
           {isSomeSelected && !isAllSelected ? <MinusIcon /> : <CheckIcon />}
         </Checkbox>
       )
     },
-    cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(checked) => row.toggleSelected(!!checked)}
-      />
-    ),
+    cell: ({ row }) => {
+      const id = row.getValue('id') as string
+      const isSelected = selectedIds.includes(id)
+
+      return (
+        <Checkbox
+          checked={isSelected}
+          onCheckedChange={(checked) => {
+            row.toggleSelected(!!checked)
+            setSelectedIds((prevIds) => {
+              if (checked) {
+                return [...new Set([...prevIds, id])]
+              } else {
+                return prevIds.filter((prevId) => prevId !== id)
+              }
+            })
+          }}
+        />
+      )
+    },
   },
   {
     accessorKey: 'id',
     header: 'ID',
     cell: ({ row }) => (
-      <div
-        className="font-mono tracking-tight"
-        style={{
-          maxWidth: '300px',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          whiteSpace: 'nowrap',
-        }}
-      >
-        {row.getValue('id')}
-      </div>
+      <div className="font-mono tracking-tight">{row.getValue('id')}</div>
     ),
   },
   {
@@ -73,10 +91,5 @@ export const columns: ColumnDef<Customer>[] = [
   {
     accessorKey: 'phone',
     header: 'Telefone',
-    cell: ({ row }) => (
-      <div className="font-mono truncate" style={{ maxWidth: '150px' }}>
-        {row.getValue('phone')}
-      </div>
-    ),
   },
 ]
