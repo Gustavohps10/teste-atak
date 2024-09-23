@@ -8,7 +8,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var allowedOrigins = builder.Configuration["ALLOWED_ORIGINS"]?.Split(",") ?? new[] { "http://localhost:5173" };
 
-// Habilitar CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
@@ -21,10 +20,8 @@ builder.Services.AddCors(options =>
         });
 });
 
-// Add services to the container.
 builder.Services.AddControllers();
 
-// JWT Bearer
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -41,20 +38,16 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
-// Database
 builder.Services.AddInfrastructure(builder.Configuration);
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
+app.UseCors("AllowSpecificOrigin");
 app.UsePathBase("/api");
 app.UseRouting();
-
-// Middleware para autenticação
-app.UseAuthentication(); // Adicione esta linha
+app.UseAuthentication();
 
 if (args.Length > 0 && args[0] == "seed")
 {
@@ -70,15 +63,13 @@ if (args.Length > 0 && args[0] == "seed")
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseAuthorization(); // Deve vir após o UseAuthentication
-
+app.UseAuthorization();
 app.MapControllers();
 app.MapFallbackToFile("/index.html");
 
