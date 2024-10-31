@@ -22,7 +22,7 @@ O projeto "QuickExcel" é uma aplicação web fullstack que automatiza o process
 - [x] Autenticação com JWT
 - [x] Front-end em React
 - [x] API em ASP.NET Core
-- [x] Conteinerização de Deploy com Docker
+- [x] Conteinerização e deploy com Docker
 
 ## :pushpin: Requisitos
 
