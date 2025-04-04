@@ -37,17 +37,21 @@ services:
     environment:
       - DB_CONNECTION=Host=db;Port=5432;Username=postgres;Password=1234;Database=teste-atak;Pooling=true;MinPoolSize=0;MaxPoolSize=100;Timeout=15;
       - ALLOWED_ORIGINS=http://localhost:5173,http://teste-atak-client:80
+      - JWT__KEY=395ad606-2bbc-4e77-86b4-1a31e91ab5b5
 
   client:
     build:
       context: .
       dockerfile: teste-atak.client/Dockerfile
     container_name: teste-atak-client
-    ports:
-      - "5173:80"
     depends_on:
       api:
         condition: service_started
+    ports:
+      - "5173:80"
+    environment:
+      - VITE_API_BASE_URL=http://api:5000
+    
 
 volumes:
   db-data:
