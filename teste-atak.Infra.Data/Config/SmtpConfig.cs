@@ -18,5 +18,7 @@ namespace teste_atak.Infra.Data.Config
 
         [Required(ErrorMessage = "O From é obrigatório.")]
         public string From { get; set; } = null!;
+
+        public bool EnableSsl { get; set; } = true;
     }
 }

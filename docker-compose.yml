@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:latest
+    image: postgres:16
     container_name: teste-atak-db
     environment:
       POSTGRES_USER: postgres
@@ -52,6 +52,7 @@ services:
       SmtpSettings__Username: ""
       SmtpSettings__Password: ""
       SmtpSettings__From: no-reply@teste-atak.local
+      SmtpSettings__EnableSsl: "false"
 
   client:
     build:

@@ -20,7 +20,7 @@ namespace teste_atak.Infra.Data.Repositories
             using var smtpClient = new SmtpClient(_smtpConfig.Host, _smtpConfig.Port)
             {
                 Credentials = new System.Net.NetworkCredential(_smtpConfig.Username, _smtpConfig.Password),
-                EnableSsl = true
+                EnableSsl = _smtpConfig.EnableSsl
             };
 
             var mailMessage = new MailMessage(_smtpConfig.From, to, subject, body);

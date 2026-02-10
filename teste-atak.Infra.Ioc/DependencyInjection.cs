@@ -34,14 +34,16 @@ namespace teste_atak.Infra.Ioc
             services.AddScoped<BogusDataGenerator>();
             
             //SMTP Mail
-            var smtpConfig = new SmtpConfig
+            SmtpConfig smtpConfig = new()
             {
                 Host = config["SmtpSettings:Host"]!,
                 Port = int.TryParse(config["SmtpSettings:Port"], out var port) ? port : 587,
-                Username = config["SmtpSettings:Username"]!,
-                Password = config["SmtpSettings:Password"]!,
-                From = config["SmtpSettings:From"]!
+                Username = config["SmtpSettings:Username"],
+                Password = config["SmtpSettings:Password"],
+                From = config["SmtpSettings:From"]!,
+                EnableSsl = !bool.TryParse(config["SmtpSettings:EnableSsl"], out var enableSsl) || enableSsl
             };
+
             services.AddSingleton(smtpConfig);
 
             //AutoMapper
