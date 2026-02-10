@@ -13,6 +13,13 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
 
+  mail:
+    image: axllent/mailpit:latest
+    container_name: teste-atak-mail
+    ports:
+      - "8025:8025" # Web UI
+      - "1025:1025" # SMTP
+
   migrate:
     build:
       context: .
@@ -32,12 +39,19 @@ services:
     depends_on:
       migrate:
         condition: service_completed_successfully
+      mail:
+        condition: service_started
     ports:
       - "5000:80"
     environment:
       - DB_CONNECTION=Host=db;Port=5432;Username=postgres;Password=1234;Database=teste-atak;Pooling=true;MinPoolSize=0;MaxPoolSize=100;Timeout=15;
       - ALLOWED_ORIGINS=http://localhost:5173,http://teste-atak-client:80
       - JWT__KEY=395ad606-2bbc-4e77-86b4-1a31e91ab5b5
+      - SMTP_HOST=mail
+      - SMTP_PORT=1025
+      - SMTP_USER=
+      - SMTP_PASS=
+      - SMTP_USE_SSL=false
 
   client:
     build:
@@ -50,8 +64,7 @@ services:
     ports:
       - "5173:80"
     environment:
-      - VITE_API_BASE_URL=http://api:5000
-    
+      - VITE_API_BASE_URL=http://api:80
 
 volumes:
   db-data:
